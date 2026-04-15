@@ -1,5 +1,4 @@
 import {
-  signInWithGithub,
   signInWithGoogle,
   signInWithPassword,
   signOut,
@@ -50,48 +49,33 @@ export default async function LoginPage({
           </form>
         ) : (
           <div className="mt-8 space-y-6">
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <form action={signInWithGithub}>
-                <button className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-black/10 bg-white px-4 text-sm font-medium text-zinc-950 hover:bg-zinc-50 sm:px-6 dark:border-white/10 dark:bg-zinc-900 dark:text-white dark:hover:bg-zinc-800">
-                  <svg
-                    aria-hidden="true"
-                    viewBox="0 0 16 16"
-                    className="h-[18px] w-[18px] shrink-0"
-                    fill="currentColor"
-                  >
-                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
-                  </svg>
-                  Continue with GitHub
-                </button>
-              </form>
-              <form action={signInWithGoogle}>
-                <button className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-black/10 bg-white px-4 text-sm font-medium text-zinc-950 hover:bg-zinc-50 sm:px-6 dark:border-white/10 dark:bg-zinc-900 dark:text-white dark:hover:bg-zinc-800">
-                  <svg
-                    aria-hidden="true"
-                    viewBox="0 0 48 48"
-                    className="h-[18px] w-[18px] shrink-0"
-                  >
-                    <path
-                      fill="#FFC107"
-                      d="M43.611 20.083H42V20H24v8h11.303C33.654 32.657 29.197 36 24 36c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.958 3.042l5.657-5.657C34.012 6.053 29.256 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.651-.389-3.917Z"
-                    />
-                    <path
-                      fill="#FF3D00"
-                      d="M6.306 14.691 12.88 19.51C14.659 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.958 3.042l5.657-5.657C34.012 6.053 29.256 4 24 4 16.318 4 9.656 8.337 6.306 14.691Z"
-                    />
-                    <path
-                      fill="#4CAF50"
-                      d="M24 44c5.154 0 9.824-1.977 13.368-5.197l-6.19-5.238C29.153 35.091 26.715 36 24 36c-5.176 0-9.62-3.318-11.283-7.946l-6.524 5.026C9.505 39.556 16.227 44 24 44Z"
-                    />
-                    <path
-                      fill="#1976D2"
-                      d="M43.611 20.083H42V20H24v8h11.303a11.97 11.97 0 0 1-4.125 5.565l.003-.002 6.19 5.238C36.988 39.148 44 34 44 24c0-1.341-.138-2.651-.389-3.917Z"
-                    />
-                  </svg>
-                  Continue with Google
-                </button>
-              </form>
-            </div>
+            <form action={signInWithGoogle}>
+              <button className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-black/10 bg-white px-4 text-sm font-medium text-zinc-950 hover:bg-zinc-50 sm:px-6 dark:border-white/10 dark:bg-zinc-900 dark:text-white dark:hover:bg-zinc-800">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 48 48"
+                  className="h-[18px] w-[18px] shrink-0"
+                >
+                  <path
+                    fill="#FFC107"
+                    d="M43.611 20.083H42V20H24v8h11.303C33.654 32.657 29.197 36 24 36c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.958 3.042l5.657-5.657C34.012 6.053 29.256 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.651-.389-3.917Z"
+                  />
+                  <path
+                    fill="#FF3D00"
+                    d="M6.306 14.691 12.88 19.51C14.659 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.958 3.042l5.657-5.657C34.012 6.053 29.256 4 24 4 16.318 4 9.656 8.337 6.306 14.691Z"
+                  />
+                  <path
+                    fill="#4CAF50"
+                    d="M24 44c5.154 0 9.824-1.977 13.368-5.197l-6.19-5.238C29.153 35.091 26.715 36 24 36c-5.176 0-9.62-3.318-11.283-7.946l-6.524 5.026C9.505 39.556 16.227 44 24 44Z"
+                  />
+                  <path
+                    fill="#1976D2"
+                    d="M43.611 20.083H42V20H24v8h11.303a11.97 11.97 0 0 1-4.125 5.565l.003-.002 6.19 5.238C36.988 39.148 44 34 44 24c0-1.341-.138-2.651-.389-3.917Z"
+                  />
+                </svg>
+                Continue with Google
+              </button>
+            </form>
 
             <div className="relative">
               <div className="absolute inset-0 flex items-center" aria-hidden="true">
@@ -141,7 +125,7 @@ export default async function LoginPage({
                 formAction={signUpWithPassword}
                 className="inline-flex h-11 w-full items-center justify-center rounded-full border border-black/10 bg-white px-6 text-sm font-medium text-zinc-950 hover:bg-zinc-50 dark:border-white/10 dark:bg-zinc-900 dark:text-white dark:hover:bg-zinc-800"
               >
-                Sign up
+                Create account
               </button>
             </form>
           </div>
