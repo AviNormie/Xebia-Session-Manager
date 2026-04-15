@@ -1,17 +1,18 @@
-## Next.js + Supabase Auth + Prisma
+## Xebia Session Manager
 
-App Router starter using:
+Template project for a simple session manager using:
+- Next.js App Router
 - Supabase Auth (SSR) with `@supabase/supabase-js` + `@supabase/ssr`
-- Cookie-based session refresh via `src/middleware.ts`
 - Prisma ORM configured for Supabase Postgres (pooling + direct URL)
+- Vercel Analytics
 
 ## Setup
 
 ### Environment variables
 
-The project includes `.env.local` with your Supabase URL/key and Prisma connection strings.
+Copy `.env.example` to `.env.local` and fill in the values.
 
-- **Important**: Replace `[YOUR-PASSWORD]` inside `DATABASE_URL` and `DIRECT_URL` with your Supabase DB password.
+- **Important**: Replace `[YOUR_DB_PASSWORD]` in `DATABASE_URL` and `DIRECT_URL` with your Supabase DB password.
 
 ### Install and run
 
@@ -22,12 +23,16 @@ npm run dev
 
 Open `http://localhost:3000`.
 
-## Supabase Auth flow
+## Auth flows
 
-- Visit `/login` and enter your email.
-- Supabase sends a magic link.
-- The link redirects to `/auth/callback`, which exchanges the auth code for a session.
-- `/account` is a protected page (redirects to `/login` if signed out).
+- **Email + password**
+  - Create an account via `/login` → **Create account** (auto signs in right after sign up when possible)
+  - Next time, sign in with the same email/password
+- **Google OAuth**
+  - `/login` → **Continue with Google**
+  - Redirects through `/auth/callback`, which exchanges the auth code for a session
+- **Protected route**
+  - `/account` redirects to `/login` if signed out
 
 ## Prisma
 
@@ -47,12 +52,14 @@ npx prisma migrate dev
 
 ## Notes
 
+- **Supabase redirect URLs (important for deploy)**: in Supabase Dashboard → Authentication → URL Configuration, set:
+  - Site URL: your deployed URL (e.g. `https://your-app.vercel.app`)
+  - Redirect URLs: include `https://your-app.vercel.app/auth/callback`
 - This project pins Prisma to v6 because Prisma v7+ changed datasource URL handling.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Push the repo to GitHub.
+2. Import into Vercel.
+3. Set environment variables in Vercel (same keys as `.env.example`).
+4. In Supabase, add your Vercel URL to allowed redirect URLs (see Notes above).
