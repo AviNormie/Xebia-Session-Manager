@@ -2,9 +2,18 @@
 
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { headers } from "next/headers";
 
 function getSiteUrl() {
   return process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+}
+
+async function getRedirectBaseUrl() {
+  const h = await headers();
+  const proto = h.get("x-forwarded-proto") ?? "http";
+  const host = h.get("x-forwarded-host") ?? h.get("host");
+  if (host) return `${proto}://${host}`;
+  return getSiteUrl();
 }
 
 export async function signInWithPassword(formData: FormData) {
@@ -31,11 +40,12 @@ export async function signUpWithPassword(formData: FormData) {
   if (!email || !password) return;
 
   const supabase = await createSupabaseServerClient();
+  const redirectBaseUrl = await getRedirectBaseUrl();
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
-      emailRedirectTo: `${getSiteUrl()}/auth/callback`,
+      emailRedirectTo: `${redirectBaseUrl}/auth/callback`,
     },
   });
 
@@ -67,10 +77,11 @@ export async function signUpWithPassword(formData: FormData) {
 
 export async function signInWithOAuth(provider: "google") {
   const supabase = await createSupabaseServerClient();
+  const redirectBaseUrl = await getRedirectBaseUrl();
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: `${getSiteUrl()}/auth/callback`,
+      redirectTo: `${redirectBaseUrl}/auth/callback`,
     },
   });
 
